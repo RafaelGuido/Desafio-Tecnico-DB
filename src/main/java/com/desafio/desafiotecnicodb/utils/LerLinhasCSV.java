@@ -1,15 +1,10 @@
 package com.desafio.desafiotecnicodb.utils;
 
-import com.opencsv.CSVParser;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
-import com.opencsv.ICSVParser;
+import com.opencsv.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.util.List;
 
 @Component

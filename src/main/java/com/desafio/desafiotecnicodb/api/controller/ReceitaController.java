@@ -1,13 +1,32 @@
 package com.desafio.desafiotecnicodb.api.controller;
 
+import com.desafio.desafiotecnicodb.domain.service.SincronizacaoReceitaService;
+import com.desafio.desafiotecnicodb.utils.LerLinhasCSV;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/receitas", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ReceitaController {
 
+    @Autowired
+    private SincronizacaoReceitaService sincronizacaoReceitaService;
 
+    @Autowired
+    private LerLinhasCSV lerLinhasCSV;
 
+    @PutMapping(value = "/atualiza-conta")
+    public ResponseEntity atualizarConta(@RequestPart("file") MultipartFile csv) throws IOException, InterruptedException, ParseException {
+        List<String[]> csvList = lerLinhasCSV.readCSV(csv);
+        sincronizacaoReceitaService.synchCsvResult(csvList);
+
+        return null;
+    }
 }

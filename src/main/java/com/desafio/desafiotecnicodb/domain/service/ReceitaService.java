@@ -1,14 +1,12 @@
 package com.desafio.desafiotecnicodb.domain.service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author gabriel_stabel<gabriel_stabel@sicredi.com.br>
- */
+@Service
 public class ReceitaService {
-
-    // Esta é a implementação interna do "servico" do banco central. Veja o código fonte abaixo para ver os formatos esperados pelo Banco Central neste cenário.
 
     public boolean atualizarConta(String agencia, String conta, double saldo, String status)
             throws RuntimeException, InterruptedException {
