@@ -1,8 +1,10 @@
 package com.desafio.desafiotecnicodb.domain.service;
 
+import com.desafio.desafiotecnicodb.utils.CSVUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ public class SincronizacaoReceitaService {
     @Autowired
     private ReceitaService receitaService;
 
-    public void synchCsvResult(List<String[]> data) {
+    public void synchCsvResult(List<String[]> data) throws IOException {
         NumberFormat format = NumberFormat.getInstance(Locale.getDefault());
         List<String[]> newCsvDataList = new ArrayList<>();
 
@@ -27,14 +29,16 @@ public class SincronizacaoReceitaService {
 
                 boolean isUpdated = receitaService.atualizarConta(line[0], line[1], number.doubleValue(), line[3]);
 
-                if (isUpdated == true) {
+                List<String> arrayToList = new ArrayList<>(Arrays.asList(line));
+                arrayToList.add(String.valueOf(isUpdated));
+                line = (String[]) arrayToList.toArray(new String[0]);
 
-                }
+                newCsvDataList.add(line);
 
             } catch (ParseException | InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
+        CSVUtils.writeCSV(newCsvDataList);
     }
 }

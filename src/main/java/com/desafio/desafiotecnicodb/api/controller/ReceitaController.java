@@ -1,7 +1,7 @@
 package com.desafio.desafiotecnicodb.api.controller;
 
 import com.desafio.desafiotecnicodb.domain.service.SincronizacaoReceitaService;
-import com.desafio.desafiotecnicodb.utils.LerLinhasCSV;
+import com.desafio.desafiotecnicodb.utils.CSVUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +19,12 @@ public class ReceitaController {
     @Autowired
     private SincronizacaoReceitaService sincronizacaoReceitaService;
 
-    @Autowired
-    private LerLinhasCSV lerLinhasCSV;
+
 
     @PutMapping(value = "/atualiza-conta")
     public ResponseEntity atualizarConta(@RequestPart("file") MultipartFile csv) throws IOException, InterruptedException, ParseException {
-        List<String[]> csvList = lerLinhasCSV.readCSV(csv);
+        List<String[]> csvList = CSVUtils.readCSV(csv);
         sincronizacaoReceitaService.synchCsvResult(csvList);
-
         return null;
     }
 }
