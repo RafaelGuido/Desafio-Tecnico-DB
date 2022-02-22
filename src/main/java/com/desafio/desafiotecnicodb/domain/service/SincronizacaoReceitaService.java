@@ -29,13 +29,17 @@ public class SincronizacaoReceitaService {
 
                 boolean isUpdated = receitaService.atualizarConta(line[0], line[1], number.doubleValue(), line[3]);
 
+                if (line[1].length() == 6) {
+                    line[1] = new StringBuilder(line[1]).insert(line[1].length() - 1,"-").toString();
+                }
+
                 List<String> arrayToList = new ArrayList<>(Arrays.asList(line));
                 arrayToList.add(String.valueOf(isUpdated));
-                line = (String[]) arrayToList.toArray(new String[0]);
+                line = arrayToList.toArray(new String[0]);
 
                 newCsvDataList.add(line);
 
-            } catch (ParseException | InterruptedException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
