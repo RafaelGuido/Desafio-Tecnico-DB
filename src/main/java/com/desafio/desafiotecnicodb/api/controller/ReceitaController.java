@@ -1,5 +1,6 @@
 package com.desafio.desafiotecnicodb.api.controller;
 
+import com.desafio.desafiotecnicodb.api.openapi.controller.ReceitaControllerOpenApi;
 import com.desafio.desafiotecnicodb.domain.service.SincronizacaoReceitaService;
 import com.desafio.desafiotecnicodb.utils.CSVUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/receitas")
-public class ReceitaController {
+public class ReceitaController implements ReceitaControllerOpenApi {
 
     @Autowired
     private SincronizacaoReceitaService sincronizacaoReceitaService;
-
-
 
     @PutMapping(value = "/atualiza-conta",produces = "text/csv")
     public ResponseEntity<Resource> atualizarConta(@RequestPart("file") MultipartFile csv) throws IOException {

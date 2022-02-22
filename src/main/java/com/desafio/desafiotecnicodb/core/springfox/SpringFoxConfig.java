@@ -46,5 +46,6 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/");
 
         registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");    }
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
 }
