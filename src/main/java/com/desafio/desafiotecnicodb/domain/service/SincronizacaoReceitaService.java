@@ -29,7 +29,7 @@ public class SincronizacaoReceitaService {
 
                 boolean isUpdated = receitaService.atualizarConta(line[0], line[1], number.doubleValue(), line[3]);
 
-                if (line[1].length() == 6) {
+                if (!line[1].isBlank() || line[1].length() > 1) {
                     line[1] = new StringBuilder(line[1]).insert(line[1].length() - 1,"-").toString();
                 }
 
