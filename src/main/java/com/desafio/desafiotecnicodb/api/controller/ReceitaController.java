@@ -24,7 +24,10 @@ public class ReceitaController implements ReceitaControllerOpenApi {
     private SincronizacaoReceitaService sincronizacaoReceitaService;
 
     @PutMapping(value = "/atualiza-conta",produces = "text/csv")
-    public ResponseEntity<Resource> atualizarConta(@RequestPart("file") MultipartFile csv) throws IOException {
+    public ResponseEntity<?> atualizarConta(@RequestPart("file") MultipartFile csv) throws IOException {
+        if (csv.isEmpty()) {
+            return ResponseEntity.badRequest().body("Requisição inválida");
+        }
         List<String[]> csvList = CSVUtils.readCSV(csv);
         sincronizacaoReceitaService.synchCsvResult(csvList);
 
