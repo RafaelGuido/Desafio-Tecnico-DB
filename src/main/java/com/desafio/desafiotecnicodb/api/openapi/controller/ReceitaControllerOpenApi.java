@@ -1,5 +1,6 @@
 package com.desafio.desafiotecnicodb.api.openapi.controller;
 
+import com.desafio.desafiotecnicodb.api.exceptionhandler.Problem;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,8 +12,7 @@ public interface ReceitaControllerOpenApi {
 
     @ApiOperation("Atualiza Conta e devolve CSV")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Retorna o CSV"),
-            @ApiResponse(code = 400, message = "Requisição inválida")
+            @ApiResponse(code = 400, message = "Requisição inválida",response = Problem.class)
     })
-    public ResponseEntity<?> atualizarConta(@ApiParam(value = "arquivo csv", required = true) MultipartFile csv) throws IOException;
+    public ResponseEntity<?> atualizarConta(@ApiParam(value = "Arquivo CSV", example = "arquivo.csv",required = true) MultipartFile csv) throws IOException;
 }
