@@ -24,13 +24,16 @@ public class ReceitaController implements ReceitaControllerOpenApi {
     @Autowired
     private SincronizacaoReceitaService sincronizacaoReceitaService;
 
+    @Autowired
+    private CSVUtils csvUtils;
+
     @PutMapping(value = "/atualiza-conta",produces = "text/csv")
     public ResponseEntity<?> atualizarConta(@RequestPart("file") MultipartFile csv) {
         if (csv.isEmpty() || !Objects.equals(csv.getContentType(), "text/csv")) {
             throw new ArquivoInvalidoException("Arquivo inválido, por favor envie um arquivo do tipo csv");
         }
         try {
-            List<String[]> csvList = CSVUtils.readCSV(csv);
+            List<String[]> csvList = csvUtils.readCSV(csv);
             sincronizacaoReceitaService.synchCsvResult(csvList);
 
             InputStreamResource resource = new InputStreamResource(new FileInputStream("dados.csv"));

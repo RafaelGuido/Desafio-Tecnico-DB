@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +16,9 @@ public class SincronizacaoReceitaService {
 
     @Autowired
     private ReceitaService receitaService;
+
+    @Autowired
+    private CSVUtils csvUtils;
 
     public void synchCsvResult(List<String[]> data) throws IOException {
         NumberFormat format = NumberFormat.getInstance(Locale.getDefault());
@@ -43,6 +45,6 @@ public class SincronizacaoReceitaService {
                 e.printStackTrace();
             }
         }
-        CSVUtils.writeCSV(newCsvDataList);
+        csvUtils.writeCSV(newCsvDataList);
     }
 }
