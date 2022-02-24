@@ -19,7 +19,7 @@ Usar o "serviço da receita" (fake) para processamento automático do arquivo.
 2. Envia a atualização para a Receita através do serviço (SIMULADO pela classe ReceitaService).
 3. Retorna um arquivo com o resultado do envio da atualização da Receita. Mesmo formato adicionando o resultado em uma nova coluna.
 
-### Formato CSV:
+### Formato CSV :point_down:
 
 agencia;conta;saldo;status;  
 0101;12225-6;100,00;A  
@@ -40,26 +40,36 @@ A aplicação recebe um CSV onde é transformado em uma lista de array de string
 
 ### Foi utilizado :point_down:
 
-- Postman (programa)
+- Postman
+- Docker
 - Spring Web (dependência)
 - OpenCSV (dependência)
 - SpringFox (dependência)
 - SwaggerUI (dependência)
 - SonarLint (plugin)
 - Gitmoji Plus (plugin)
+    
+### Caso ocorra problema para subir o Docker em Windows :point_down:
+- Clone com -> `git clone https://github.com/RafaelGuido/Desafio-Tecnico-DB.git  --config core.autocrlf=input`
+    
+### Subir aplicação via DOCKER :point_down:
+
+- Iniciar docker no PC
+- no diretório do projeto clonado -> `./mvnw package -Pdocker`
+- após o package -> `docker-compose up`
 
 ### Instalação da aplicação :point_down:
 
 - IntelliJ/Eclipse: Importar como projeto Maven.
-- mvn install
-
+- `mvn install`
+    
 ### Iniciar aplicação :point_down:
 
 - Rodar a classe DesafioTecnicoDbApplication
 
 ### Comando para os testes :point_down:
 
-- ./mvnw test (teste unitário)
+- `./mvnw test` (teste unitário)
 
 ### Documentação da API :speech_balloon:
 
