@@ -1,0 +1,13 @@
+version: "3.9"
+
+networks:
+  desafiotecnicodb-network:
+    driver: bridge
+
+services:
+  desafiotecnicodb:
+    image: desafiotecnicodb
+    ports:
+      - "8080:8080"
+    networks:
+      - desafiotecnicodb-network
